@@ -16,6 +16,7 @@ namespace TabloidMVC.Controllers
 
         // GET: CategoryController 
         public ActionResult Index()
+            // a View was created from Index to List all Categories
         {
             var categories =
                 _categoryRepository.GetAll();
