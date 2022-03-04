@@ -12,9 +12,9 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
+@*            <th>
                 @Html.DisplayNameFor(model => model.Id)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -30,9 +30,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
+@*            The Edit and Delete buttons below are disabled until implemented*@
             <td>
-                @Html.ActionLink("Edit", "Edit", new {  id=item.Id  }) |
-                @Html.ActionLink("Delete", "Delete", new {  id=item.Id  })
+@*                @Html.ActionLink("Edit", "Edit", new {  id=item.Id  }) |
+                @Html.ActionLink("Delete", "Delete", new {  id=item.Id  })*@
             </td>
         </tr>
 }
