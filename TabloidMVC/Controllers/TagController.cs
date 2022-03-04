@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using TabloidMVC.Models;
@@ -25,6 +26,29 @@ namespace TabloidMVC.Controllers
         {
             List<Tag> tags = _tagRepository.GetAllTags();
             return View(tags);
+        }
+
+        // GET: TagController/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: TagController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Tag tag)
+        {
+            try
+            {
+                _tagRepository.AddTag(tag);
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                return View(tag);
+            }
         }
     }
 }
