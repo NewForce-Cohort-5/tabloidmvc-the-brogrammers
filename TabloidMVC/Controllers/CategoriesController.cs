@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using TabloidMVC.Models;
 using TabloidMVC.Repositories;
 
 namespace TabloidMVC.Controllers
@@ -36,18 +38,21 @@ namespace TabloidMVC.Controllers
             return View();
         }
 
-        // POST: CategoriesController/Create
+        // POST: CategoryController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Category category)
+        // This code allows users to Create a new Category to apply to Posts
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                _categoryRepository.AddCategory(category);
+
+                return RedirectToAction("Index");
             }
-            catch
+            catch (Exception)
             {
-                return View();
+                return View(category);
             }
         }
 
