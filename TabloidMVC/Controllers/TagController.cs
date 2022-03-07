@@ -11,6 +11,7 @@ using TabloidMVC.Repositories;
 
 namespace TabloidMVC.Controllers
 {
+    //only allows admin to access 
     [Authorize]
     public class TagController : Controller
     {
@@ -42,6 +43,31 @@ namespace TabloidMVC.Controllers
             try
             {
                 _tagRepository.AddTag(tag);
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                return View(tag);
+            }
+        }
+
+        // GET: Owners/Delete/5
+        public ActionResult Delete(int id)
+        {
+            Tag tag = _tagRepository.GetTagById(id);
+
+            return View(tag);
+        }
+
+        // POST: TagController/Delete
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, Tag tag)
+        {
+            try
+            {
+                _tagRepository.DeleteTag(id);
 
                 return RedirectToAction(nameof(Index));
             }
