@@ -1,0 +1,2 @@
+﻿DELETE FROM Tag
+WHERE [Id] = id
