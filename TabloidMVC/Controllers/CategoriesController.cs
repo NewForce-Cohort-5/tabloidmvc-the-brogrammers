@@ -55,26 +55,36 @@ namespace TabloidMVC.Controllers
             }
         }
 
-        // GET: CategoriesController/Edit/5
+        // GET: CategoryController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Category category = _categoryRepository.GetCategorygById(id);
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            return View(category);
         }
 
-        // POST: CategoriesController/Edit/5
+        // POST: CategoryController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Category category)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                _categoryRepository.UpdateCategory(category);
+
+                return RedirectToAction("Index");
             }
-            catch
+            catch (Exception)
             {
-                return View();
+                return View(category);
             }
         }
+
 
         // GET: CategoryController/Delete/5
         public ActionResult Delete(int id)
