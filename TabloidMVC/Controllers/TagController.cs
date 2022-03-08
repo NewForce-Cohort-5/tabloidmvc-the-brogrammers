@@ -52,7 +52,7 @@ namespace TabloidMVC.Controllers
             }
         }
 
-        // GET: Owners/Delete/5
+        // GET: Tags/Delete/5
         public ActionResult Delete(int id)
         {
             Tag tag = _tagRepository.GetTagById(id);
@@ -76,5 +76,34 @@ namespace TabloidMVC.Controllers
                 return View(tag);
             }
         }
+
+        //GET: Tags/Edit
+        public ActionResult Edit(int id)
+        {
+          
+            Tag tag = _tagRepository.GetTagById(id);
+            return View(tag);
+        }
+
+        //Post: Tags/Edit
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, Tag tag)
+        {
+            try
+            {
+                _tagRepository.UpdateTag(tag);
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                return View(tag);
+            }
+        }
+
+
+
+
     }
 }
